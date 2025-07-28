@@ -1,3 +1,4 @@
+un Sharma\OneDrive\Desktop\Programming\DSMP\prac\spotifyclone.github.io\script.js
 console.log("Welcome to Spotify");
 
 // Initialize the Variables
@@ -107,3 +108,16 @@ document.getElementById('previous').addEventListener('click', ()=>{
     masterPlay.classList.remove('fa-play-circle');
     masterPlay.classList.add('fa-pause-circle');
 })
+
+// Shuffle button functionality
+document.getElementById('shuffle').addEventListener('click', ()=>{
+    let randomIndex = Math.floor(Math.random() * songs.length);
+    songIndex = randomIndex;
+    audioElement.src = songs[songIndex].filePath;
+    masterSongName.innerText = songs[songIndex].songName;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    masterPlay.classList.remove('fa-play-circle');
+    masterPlay.classList.add('fa-pause-circle');
+    gif.style.opacity = 1;
+});

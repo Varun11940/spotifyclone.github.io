@@ -6,8 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spotify - Your favourite music is here</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- React + Babel CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
+    <!-- React root -->
+    <div id="react-root"></div>
+
+    <!-- Navigation bar -->
     <nav>
       <ul>
         <li class="brand"><img src="logo.png" alt="Spotify" /> Spotify</li>
@@ -16,105 +25,16 @@
       </ul>
     </nav>
 
+    <!-- Song list container -->
     <div class="container">
       <div class="songList">
         <h1>Best of NCS - No Copyright Sounds</h1>
-        <div class="songItemContainer">
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="0" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="1" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="2" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="3" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="4" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="5" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="6" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="7" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="8" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-          <div class="songItem">
-            <img alt="1" />
-            <span class="songName">Let me Love You</span>
-            <span class="songlistplay"
-              ><span class="timestamp"
-                >05:34
-                <i id="9" class="far songItemPlay fa-play-circle"></i> </span
-            ></span>
-          </div>
-        </div>
+        <div id="songItemContainer"></div> <!-- React mounts songItems here -->
       </div>
       <div class="songBanner"></div>
     </div>
 
+    <!-- Bottom player controls -->
     <div class="bottom">
       <input
         type="range"
@@ -125,11 +45,10 @@
         max="100"
       />
       <div class="icons">
-        <!-- fontawesome icons -->
         <i class="fas fa-3x fa-step-backward" id="previous"></i>
         <i class="far fa-3x fa-play-circle" id="masterPlay"></i>
         <i class="fas fa-3x fa-random" id="shuffle"></i>
-        <!-- Shuffle button added -->
+        <i class="fas fa-3x fa-redo" id="repeat"></i>
         <i class="fas fa-3x fa-step-forward" id="next"></i>
       </div>
       <div class="songInfo">
@@ -137,10 +56,69 @@
         <span id="masterSongName">Warriyo - Mortals [NCS Release]</span>
       </div>
     </div>
+
+    <!-- Script files -->
     <script src="script.js"></script>
-    <script
-      src="https://kit.fontawesome.com/26504e4a1f.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/26504e4a1f.js" crossorigin="anonymous"></script>
+
+    <!-- React Components for song list -->
+    <script type="text/babel">
+      const songs = [
+        { songName: "Warriyo - Mortals [NCS Release]", filePath: "songs/1.mp3", coverPath: "covers/1.jpg" },
+        { songName: "Cielo - Huma-Huma", filePath: "songs/2.mp3", coverPath: "covers/2.jpg" },
+        { songName: "DEAF KEV - Invincible", filePath: "songs/3.mp3", coverPath: "covers/3.jpg" },
+        { songName: "Different Heaven - My Heart", filePath: "songs/4.mp3", coverPath: "covers/4.jpg" },
+        { songName: "Janji - Heroes Tonight", filePath: "songs/5.mp3", coverPath: "covers/5.jpg" },
+        { songName: "Rabba - Salam-e-Ishq", filePath: "songs/2.mp3", coverPath: "covers/6.jpg" },
+        { songName: "Sakhiyaan - Salam-e-Ishq", filePath: "songs/2.mp3", coverPath: "covers/7.jpg" },
+        { songName: "Bhula Dena - Salam-e-Ishq", filePath: "songs/2.mp3", coverPath: "covers/8.jpg" },
+        { songName: "Tumhari Kasam - Salam-e-Ishq", filePath: "songs/2.mp3", coverPath: "covers/9.jpg" },
+        { songName: "Na Jaana - Salam-e-Ishq", filePath: "songs/4.mp3", coverPath: "covers/10.jpg" },
+      ];
+
+      const SongItem = ({ song, index, current, onPlay }) => {
+        return (
+          <div className="songItem">
+            <img src={song.coverPath} alt={index + 1} />
+            <span className="songName">{song.songName}</span>
+            <span className="songlistplay">
+              <span className="timestamp">
+                05:34
+                <i
+                  className={`far songItemPlay ${current === index ? "fa-pause-circle" : "fa-play-circle"}`}
+                  onClick={() => onPlay(index)}
+                ></i>
+              </span>
+            </span>
+          </div>
+        );
+      };
+
+      const SongList = () => {
+        const [songIndex, setSongIndex] = React.useState(0);
+        const audioRef = React.useRef(new Audio(songs[0].filePath));
+
+        React.useEffect(() => {
+          audioRef.current.src = songs[songIndex].filePath;
+          audioRef.current.play();
+          document.getElementById("masterSongName").innerText = songs[songIndex].songName;
+          document.getElementById("gif").style.opacity = 1;
+        }, [songIndex]);
+
+        const handlePlay = (index) => {
+          setSongIndex(index);
+        };
+
+        return (
+          <div>
+            {songs.map((song, i) => (
+              <SongItem key={i} index={i} song={song} current={songIndex} onPlay={handlePlay} />
+            ))}
+          </div>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("songItemContainer")).render(<SongList />);
+    </script>
   </body>
 </html>
